@@ -7,7 +7,7 @@ class CreateMeals < ActiveRecord::Migration[7.0]
       t.string :tags
       t.string :ingredients
       t.belongs_to :category, foreign_key: true
-      t.integer :status
+      t.integer :status, default: 0
 
       t.timestamps
     end
