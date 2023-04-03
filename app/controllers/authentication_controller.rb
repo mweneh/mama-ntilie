@@ -13,19 +13,15 @@ class AuthenticationController < ApplicationController
     def auth_params
     params.permit(:username, :email, :pass)
     end
-    def account_created
-        app_response(status: :created, message: "Account created")
+    def account_created(failed: false, errors: nil)
+        app_response(status: failed ? :unprocessable_entity : :created,
+                     message: failed ? "Account creation failed" : "Account created",
+                     body: errors)
     end
       
-    def account_creation_failed(errors)
-    app_response(status: :unprocessable_entity, message: "Account creation failed", body: errors)
-    end
-
-    def account_login
-    app_response(status: :ok, message: "Login successful")
+    def account_login(failed: false)
+        app_response(status: failed ? :unprocessable_entity : :ok,
+                     message: failed ? "We could not find your account" : "Login successful")
     end
     
-    def account_login_failed
-    app_response(status: :unprocessable_entity, message: "We could not find your account")
-    end
 end
