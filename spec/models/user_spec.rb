@@ -33,5 +33,17 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:username).is_at_least(6) }
   
   end
+
+  describe "password data validation" do
+    it "should contain a valid email address" do
+      password_error = "That password is not strong enough"
+  
+      invalid_password = User.create(password: "pas12")
+      valid_password = User.create(password: "S@mail2")
+  
+      expect(invalid_password.errors[:base]).to include(password_error)
+      expect(valid_password.errors[:base]).to_not include(password_error)
+    end
+  end
 end
 
