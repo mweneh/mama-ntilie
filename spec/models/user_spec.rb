@@ -25,5 +25,13 @@ RSpec.describe User, type: :model do
     end
   
   end
+
+  describe "username data validations" do
+
+    it { is_expected.to validate_presence_of(:username) }
+    it { is_expected.to validate_uniqueness_of(:username) }
+    it { is_expected.to validate_length_of(:username).is_at_least(6) }
+  
+  end
 end
 
