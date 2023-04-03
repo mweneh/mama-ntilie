@@ -4,7 +4,8 @@ class AuthenticationController < ApplicationController
     end
     
     def register_user
-    
+        user = User.create(username: auth_params[:username], email: auth_params[:email], password: auth_params[:pass])
+        user.valid? ? account_created : account_creation_failed(user.errors)
     end
 
     private
