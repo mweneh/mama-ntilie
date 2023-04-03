@@ -1,6 +1,7 @@
 class AuthenticationController < ApplicationController
     def login_user
-
+        user = User.where(["username = :username OR email = :email", {username: auth_params[:username], email: auth_params[:email]}] )
+        user.first&.authenticate(auth_params[:pass])? account_login : account_login_failed
     end
     
     def register_user
