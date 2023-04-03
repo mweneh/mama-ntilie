@@ -5,5 +5,9 @@ class ApplicationController < ActionController::API
            message: message,
            body: body
        }, status: status
-      end
+    end
+    
+    def not_found(message)
+    app_response(status: 404, message: message)
+    end
 end
