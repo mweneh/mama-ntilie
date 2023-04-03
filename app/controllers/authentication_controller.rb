@@ -20,4 +20,12 @@ class AuthenticationController < ApplicationController
     def account_creation_failed(errors)
     app_response(status: :unprocessable_entity, message: "Account creation failed", body: errors)
     end
+
+    def account_login
+    app_response(status: :ok, message: "Login successful")
+    end
+    
+    def account_login_failed
+    app_response(status: :unprocessable_entity, message: "We could not find your account")
+    end
 end
