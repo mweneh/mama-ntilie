@@ -14,16 +14,17 @@ class AuthenticationController < ApplicationController
     def auth_params
         params.permit(:username, :email, :pass)
     end
-    def account_created(failed: false, errors: nil)
+    def account_created(failed: false, errors: nil, token: nil)
         app_response(status: failed ? :unprocessable_entity : :created,
                      message: failed ? "Account creation failed" : "Account created",
-                     body: errors)
-    end
-      
-    def account_login(failed: false)
+                     body: failed ? errors : token)
+      end
+    
+      def account_login(failed: false, token: nil)
         app_response(status: failed ? :unprocessable_entity : :ok,
-                     message: failed ? "We could not find your account" : "Login successful")
-    end
+                     message: failed ? "We could not find your account" : "Login successful",
+                     body: token)
+      end
      # create JWT token with user data
     def create_token(user)
         # user information
