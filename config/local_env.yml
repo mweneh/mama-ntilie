@@ -1,1 +1,1 @@
-JWT_SECRET: strong_drink
+JWT_SECRET: "strong_drink"
