@@ -24,5 +24,19 @@ class AuthenticationController < ApplicationController
         app_response(status: failed ? :unprocessable_entity : :ok,
                      message: failed ? "We could not find your account" : "Login successful")
     end
-    
+     # create JWT token with user data
+    def create_token(user)
+        # user information
+        user_data = {
+        username: user.username,
+        role: user.u_type,
+        }
+        # jwt payload
+        payload = {
+        data: user_data,
+        exp: Time.now.to_i + 6 * 3600
+        }
+        # return the token as a hash
+        { authToken: encode_data(payload) }
+    end
 end
